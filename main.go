@@ -10,15 +10,9 @@ import (
 	"github.com/argandas/serial"
 )
 
-const (
-	rtuMinSize = 4
-	rtuMaxSize = 256
-)
-
 var (
 	atmhz  *serial.SerialPort
 	strhex string
-	data   [256]byte
 	line   uint8
 )
 
@@ -51,8 +45,8 @@ func main() {
 			}
 			//fmt.Println()
 			log.Printf("strhex:%s", strhex)
-			if strings.Contains(strhex, "86") && strings.Contains(strhex, ",0") {
-				mainHEX := strhex[strings.Index(strhex, "86")+3 : strings.Index(strhex, ",0")]
+			if strings.Contains(strhex, "86") && strings.Contains(strhex, ",0,0,0") {
+				mainHEX := strhex[strings.Index(strhex, "86")+3 : strings.Index(strhex, ",0,0,0")]
 				log.Printf("mainHEX:%s", mainHEX)
 
 				THEX := mainHEX[strings.LastIndex(mainHEX, ",")+1 : len(mainHEX)]
