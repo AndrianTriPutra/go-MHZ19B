@@ -47,31 +47,31 @@ func main() {
 			log.Printf("strhex:%s", strhex)
 			if strings.Contains(strhex, "86") && strings.Contains(strhex, ",0,0,0") {
 				mainHEX := strhex[strings.Index(strhex, "86")+3 : strings.Index(strhex, ",0,0,0")]
-				log.Printf("mainHEX:%s", mainHEX)
+				//log.Printf("mainHEX:%s", mainHEX)
 
 				THEX := mainHEX[strings.LastIndex(mainHEX, ",")+1 : len(mainHEX)]
-				log.Printf("THEX:%s", THEX)
+				//log.Printf("THEX:%s", THEX)
 
 				HiHEX := mainHEX[0:strings.Index(mainHEX, ",")]
-				log.Printf("HiHEX:%s", HiHEX)
+				//log.Printf("HiHEX:%s", HiHEX)
 
 				LoHEX := mainHEX[strings.Index(mainHEX, ",")+1 : strings.LastIndex(mainHEX, ",")]
-				log.Printf("LoHEX:%s", LoHEX)
+				//log.Printf("LoHEX:%s", LoHEX)
 
-				Suhu, err := strconv.ParseInt(hexaNumberToInteger(THEX), 16, 64)
+				Suhu, err := strconv.ParseInt(THEX, 16, 64)
 				if err == nil {
 					Suhu -= 40
 					log.Printf("Suhu:%v C", Suhu)
 				}
 
-				DecHi, err := strconv.ParseInt(hexaNumberToInteger(HiHEX), 16, 64)
+				DecHi, err := strconv.ParseInt(HiHEX, 16, 64)
 				if err == nil {
-					log.Printf("DecHi:%v", DecHi)
+					//log.Printf("DecHi:%v", DecHi)
 				}
 
-				DecLi, err := strconv.ParseInt(hexaNumberToInteger(LoHEX), 16, 64)
+				DecLi, err := strconv.ParseInt(LoHEX, 16, 64)
 				if err == nil {
-					log.Printf("DecLi:%v", DecLi)
+					//log.Printf("DecLi:%v", DecLi)
 				}
 
 				ConCO2 := (DecHi * 256) + DecLi
@@ -83,15 +83,3 @@ func main() {
 		}
 	}
 }
-func hexaNumberToInteger(hexaString string) string {
-	// replace 0x or 0X with empty String
-	numberStr := strings.Replace(hexaString, "0x", "", -1)
-	numberStr = strings.Replace(numberStr, "0X", "", -1)
-	return numberStr
-}
-
-/*
-2019/07/23 15:11:12 strhex:ff,86,5,5f,44,0,0,0,d2,0,
-2019/07/23 15:11:12 mainHEX:5,5f,44
-
-*/
