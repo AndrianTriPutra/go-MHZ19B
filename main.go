@@ -45,7 +45,7 @@ func main() {
 			}
 			//fmt.Println()
 			log.Printf("strhex:%s", strhex)
-			if strings.Contains(strhex, "86") && strings.Contains(strhex, ",0,0,0") {
+			if (strings.Contains(strhex, "86") && strings.Contains(strhex, ",0,0,0")) && (strings.Index(strhex, "86") < strings.Index(strhex, ",0,0,0")) {
 				mainHEX := strhex[strings.Index(strhex, "86")+3 : strings.Index(strhex, ",0,0,0")]
 				//log.Printf("mainHEX:%s", mainHEX)
 
